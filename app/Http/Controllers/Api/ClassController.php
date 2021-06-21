@@ -40,20 +40,16 @@ class ClassController extends Controller
      */
     public function show($id)
     {
-        //
+        $show = DB::table('classes')->where('id', $id)->first();
+        return response()->json($show);
     }
 
-    
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $data = array();
+        $data['class_name'] = $request ->class_name;
+        DB::table('classes')->where('id', $id)->update($data);
+        return response('updated');
     }
 
     /**
@@ -64,6 +60,7 @@ class ClassController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('classes')->where('id', $id)->delete();
+        return response('deleted');
     }
 }
